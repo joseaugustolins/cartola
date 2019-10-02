@@ -14,7 +14,7 @@ function App() {
     function getTime(time) {
       console.log("timae"+time)
       axios.get('https://cors-anywhere.herokuapp.com/https://api.cartolafc.globo.com/time/id/'+time+'/22',
-      { headers: { 'X-GLB-Token': '1224107e0cf31aca0fbb6473137441744614d4674476b5467656c443964634476466852432d693849697453537358336e3559614939687230435930436e3142426e6762656d737967524a7251586e6a326c79444d63347269494576555435386a2d5135626f773d3d3a303a6a6f73652e6a6f73656175677573746f6c696e73' } }).then(response => {
+      { headers: { 'X-GLB-Token': '' } }).then(response => {
         setAtletas(response.data.atletas);
         setTime(response.data);
         console.log(response.data);
@@ -28,7 +28,7 @@ function App() {
     useEffect( () => {
         
         function loadLiga(){axios.get('https://cors-anywhere.herokuapp.com/https://api.cartolafc.globo.com/auth/liga/soccer-and-beer',
-              { headers: { 'X-GLB-Token': '1224107e0cf31aca0fbb6473137441744614d4674476b5467656c443964634476466852432d693849697453537358336e3559614939687230435930436e3142426e6762656d737967524a7251586e6a326c79444d63347269494576555435386a2d5135626f773d3d3a303a6a6f73652e6a6f73656175677573746f6c696e73' } }).then(response => {
+              { headers: { 'X-GLB-Token': '' } }).then(response => {
                 console.log(response.data)
                 setLiga(response.data.times);
               })
