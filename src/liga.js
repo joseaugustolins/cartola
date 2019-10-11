@@ -24,7 +24,7 @@ let exibe=1;
 
 function premiacao(posicao){
 
-  if(posicao>=34){
+  if(posicao>=35){
     return "PAGAR GELADA"
   }
 
@@ -51,9 +51,6 @@ function premiacao(posicao){
 
 
 function Liga({liga, atletas, selecionaTime, dadosTime}) {  
-
-  
-
 
   const listaAtletas = atletas.map(
     atleta=>{                           

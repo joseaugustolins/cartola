@@ -12,38 +12,36 @@ function App() {
 
     function pontuacaoAtleta(id){
       axios.get("https://cors-anywhere.herokuapp.com/https://api.cartolafc.globo.com/atletas/pontuados/").then(res=>{
-        const a = res.data.atletas[id].pontuacao;        
-        console.log("aaaa "+a);
-        return a;
+
+        atletas.map(a=>{
+          if(a.atleta_id !== id) {                        
+            return a;
+          }else{   
+            var ret = {...a, pontos_num: res.data.atletas[id].pontuacao}            
+            return ret;
+          }
+        })        
       }).catch(error => {
-        console.log(error)
+        console.log("errou pontuacaoAtleta")
       })
     }
 
     function getTime(time) {     
       var atltemp; 
-      var pontoAtleta = 8;
       axios.get('https://cors-anywhere.herokuapp.com/https://api.cartolafc.globo.com/time/id/'+time,
       { headers: { 'X-GLB-Token': '1224107e0cf31aca0fbb6473137441744614d4674476b5467656c443964634476466852432d693849697453537358336e3559614939687230435930436e3142426e6762656d737967524a7251586e6a326c79444d63347269494576555435386a2d5135626f773d3d3a303a6a6f73652e6a6f73656175677573746f6c696e73' } }).then(response => {
-        atltemp = response.data.atletas;
-        atltemp.map(atleta=>{
-          axios.get("https://cors-anywhere.herokuapp.com/https://api.cartolafc.globo.com/atletas/pontuados/").then(res=>{
-            pontoAtleta = res.data.atletas[atleta.atleta_id].pontuacao;                        
-          }).catch(error => {
-            console.log(error)
-          })
-          atleta.pontos_num = pontoAtleta;
-        })   
-        
+        atltemp = response.data.atletas;        
+        var aaa = [];
+        atltemp.forEach(a=>{          
+          a = pontuacaoAtleta(a.atleta_id)
+          console.log(a)          
+        })
+        console.log(aaa)        
         setAtletas(atltemp);
-        
-
-        setDadosTime(response.data.time)
-        
-        console.log(response.data);
+        setDadosTime(response.data.time)       
       })
       .catch(error => {
-        console.log(error);
+        console.log("errou gettime");
       });
 
     }
